@@ -27,7 +27,13 @@ class bcolors:
 class LoggingClientSession(aiohttp.ClientSession):
     async def _request(self, method, url, **kwargs):
         # print('Starting request: ', method, url, kwargs)
-        return await super()._request(method, url, **kwargs)
+
+        response = await super()._request(method, url, **kwargs)
+
+        # print('Response: ', response)
+
+        return response
+
 
 async def main():
 
