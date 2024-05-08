@@ -28,23 +28,15 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-_WARNING_DEBUG_ENABLED = (
-    "Debug output enabled. Logs may contain personally identifiable "
-    "information and account credentials! Be sure to sanitise these logs "
-    "before sending them to a third party or posting them online.")
-
+# better logging
+class LoggingClientSession(aiohttp.ClientSession):
+    async def _request(self, method, url, **kwargs):
+        # print('Starting request: ', method, url, kwargs)
+        return await super()._request(method, url, **kwargs)
 
 async def main():
 
-    #renault_log = logging.getLogger("renault_api")
-    #renault_log.setLevel(logging.DEBUG)
-
-    #logging.basicConfig()
-
-    #renault_log.warning(_WARNING_DEBUG_ENABLED)
-
-
-    async with aiohttp.ClientSession() as websession:
+    async with LoggingClientSession() as websession:
         client = RenaultClient(websession=websession, locale="de_DE")
         await client.session.login(os.getenv('user'), os.getenv('password'))
         #print(f"Accounts: {await client.get_person()}") # List available accounts, make a note of kamereon account id
@@ -59,6 +51,8 @@ async def main():
         battery_status = await vehicle.get_battery_status()
         hvac = await vehicle.get_hvac_status()
         location = await vehicle.get_location()
+
+
 
         #from_zone = tz.gettz('UTC')
         to_zone = tz.gettz('Germany/Berlin')
