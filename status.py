@@ -58,7 +58,7 @@ async def main():
         to_zone = tz.gettz('Germany/Berlin')
 
         print(
-            f"{bcolors.OKGREEN}Last updated: {parser.parse(battery_status.timestamp).astimezone(to_zone):%d.%m.%y %H:%M}{bcolors.ENDC}"
+            f"{bcolors.OKGREEN}Last updated: {parser.parse(battery_status.timestamp).astimezone(to_zone):%d.%m.%y, %H:%M}{bcolors.ENDC}"
         )
 
         print(
@@ -77,7 +77,7 @@ async def main():
             f"{bcolors.OKGREEN}Nähester Ort: {reverse_geocode.search(coordinates)[0]['city']}{bcolors.ENDC}"
         )
         print(
-            f"{bcolors.OKGREEN}GPS last updated: {parser.parse(location.lastUpdateTime).astimezone(to_zone):%d.%m.%y %H:%M}{bcolors.ENDC}"
+            f"{bcolors.OKGREEN}GPS last updated: {parser.parse(location.lastUpdateTime).astimezone(to_zone):%d.%m.%y, %H:%M}{bcolors.ENDC}"
         )
 
         print(
