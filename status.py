@@ -29,14 +29,15 @@ class bcolors:
 
 
 # better logging
-class LoggingClientSession(aiohttp.ClientSession):
-    async def _request(self, method, url, **kwargs):
+#class LoggingClientSession(aiohttp.ClientSession):
+#    async def _request(self, method, url, **kwargs):
         # print('Starting request: ', method, url, kwargs)
-        return await super()._request(method, url, **kwargs)
+#        return await super()._request(method, url, **kwargs)
 
 async def main():
 
-    async with LoggingClientSession() as websession:
+    #async with LoggingClientSession() as websession:
+    async with aiohttp.ClientSession() as websession:
         client = RenaultClient(websession=websession, locale="de_DE")
         await client.session.login(os.getenv('user'), os.getenv('password'))
         #print(f"Accounts: {await client.get_person()}") # List available accounts, make a note of kamereon account id

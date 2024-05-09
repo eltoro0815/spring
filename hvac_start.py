@@ -22,23 +22,17 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-
-
-class LoggingClientSession(aiohttp.ClientSession):
-    async def _request(self, method, url, **kwargs):
+# better logging
+#class LoggingClientSession(aiohttp.ClientSession):
+#    async def _request(self, method, url, **kwargs):
         # print('Starting request: ', method, url, kwargs)
-
-        response = await super()._request(method, url, **kwargs)
-
-        # print('Response: ', response)
-
-        return response
+#        return await super()._request(method, url, **kwargs)
 
 
 async def main():
 
-
-    async with LoggingClientSession() as websession:
+    #async with LoggingClientSession() as websession:
+    async with aiohttp.ClientSession() as websession:
         client = RenaultClient(websession=websession, locale="de_DE")
         await client.session.login(os.getenv('user'), os.getenv('password'))
 
