@@ -3,7 +3,7 @@ import asyncio
 
 from renault_api.renault_client import RenaultClient
 
-import reverse_geocode
+#import reverse_geocode
 
 from dateutil import parser
 from datetime import datetime
@@ -83,9 +83,9 @@ async def main():
         )
 
         coordinates = (location.gpsLatitude, location.gpsLongitude),
-        print(
-            f"{bcolors.OKGREEN}Nähester Ort: {reverse_geocode.search(coordinates)[0]['city']}{bcolors.ENDC}"
-        )
+        # print(
+        #     f"{bcolors.OKGREEN}Nähester Ort: {reverse_geocode.search(coordinates)[0]['city']}{bcolors.ENDC}"
+        # )
         print(
             f"{bcolors.OKGREEN}GPS last updated: {parser.parse(location.lastUpdateTime).astimezone(to_zone):%d.%m.%y, %H:%M}{bcolors.ENDC}"
         )
