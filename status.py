@@ -29,15 +29,20 @@ class bcolors:
 
 
 # better logging
-#class LoggingClientSession(aiohttp.ClientSession):
+# class LoggingClientSession(aiohttp.ClientSession):
 #    async def _request(self, method, url, **kwargs):
-        # print('Starting request: ', method, url, kwargs)
-#        return await super()._request(method, url, **kwargs)
+#         print('Starting request: ', method, url, kwargs)
+#         return await super()._request(method, url, **kwargs)
+
 
 async def main():
 
-    #async with LoggingClientSession() as websession:
-    async with aiohttp.ClientSession() as websession:
+
+    my_websession = aiohttp.ClientSession()
+    #my_websession = LoggingClientSession()
+
+
+    async with my_websession as websession:
         client = RenaultClient(websession=websession, locale="de_DE")
         await client.session.login(os.getenv('user'), os.getenv('password'))
         #print(f"Accounts: {await client.get_person()}") # List available accounts, make a note of kamereon account id
@@ -50,7 +55,11 @@ async def main():
         vehicle = await account.get_api_vehicle(vin)
         cockpit_infos = await vehicle.get_cockpit()
         battery_status = await vehicle.get_battery_status()
-        hvac = await vehicle.get_hvac_status()
+
+
+        # hvac = await vehicle.get_hvac_status()
+
+
         location = await vehicle.get_location()
 
 
@@ -85,9 +94,9 @@ async def main():
             f"{bcolors.OKGREEN}GPS: {location.gpsLatitude,location.gpsLongitude}{bcolors.ENDC}"
         )
 
-        print(
-            f"{bcolors.OKGREEN}Lüftung/Klima: {hvac.hvacStatus}{bcolors.ENDC}"
-        )
+        # print(
+        #     f"{bcolors.OKGREEN}Lüftung/Klima: {hvac.hvacStatus}{bcolors.ENDC}"
+        # )
 
 print(f"{bcolors.OKBLUE}Warten auf Antwort ...{bcolors.ENDC}")
 loop = asyncio.get_event_loop()
