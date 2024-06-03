@@ -23,10 +23,10 @@ class bcolors:
 
 
 # better logging
-#class LoggingClientSession(aiohttp.ClientSession):
-#    async def _request(self, method, url, **kwargs):
-        # print('Starting request: ', method, url, kwargs)
-#        return await super()._request(method, url, **kwargs)
+# class LoggingClientSession(aiohttp.ClientSession):
+#     async def _request(self, method, url, **kwargs):
+#         print('Starting request: ', method, url, kwargs)
+#         return await super()._request(method, url, **kwargs)
 
 
 async def main():
