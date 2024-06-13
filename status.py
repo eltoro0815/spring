@@ -57,7 +57,7 @@ async def main():
         battery_status = await vehicle.get_battery_status()
 
 
-        # hvac = await vehicle.get_hvac_status()
+        hvac = await vehicle.get_hvac_status()
 
 
         location = await vehicle.get_location()
@@ -94,9 +94,9 @@ async def main():
             f"{bcolors.OKGREEN}GPS: {location.gpsLatitude,location.gpsLongitude}{bcolors.ENDC}"
         )
 
-        # print(
-        #     f"{bcolors.OKGREEN}Lüftung/Klima: {hvac.hvacStatus}{bcolors.ENDC}"
-        # )
+        print(
+            f"{bcolors.OKGREEN}Lüftung/Klima: {hvac.hvacStatus}{bcolors.ENDC}"
+        )
 
 print(f"{bcolors.OKBLUE}Warten auf Antwort ...{bcolors.ENDC}")
 loop = asyncio.get_event_loop()
